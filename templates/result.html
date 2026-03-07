@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="text-align: center; margin-bottom: 30px;">
+    <h2>Transformation Complete</h2>
+</div>
+
+<div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+    <div class="comic-box" style="flex: 1; min-width: 300px; text-align: center;">
+        <h3>Original</h3>
+        <img src="{{ url_for('static', filename='uploads/' + original) }}" alt="Original Image" style="width: 100%; border: 3px solid var(--black); box-sizing: border-box; border-radius: 8px;">
+    </div>
+    
+    <div class="comic-box" style="flex: 1; min-width: 300px; text-align: center; border-color: var(--primary-red);">
+        <h3 style="color: var(--primary-red);">Anime Result</h3>
+        <img src="{{ url_for('static', filename='outputs/' + result) }}" alt="Result Image" style="width: 100%; border: 3px solid var(--black); box-sizing: border-box; border-radius: 8px;">
+        
+        <br><br>
+        <a href="{{ url_for('static', filename='outputs/' + result) }}" download="anime_output_{{ result }}" class="btn">⬇ Download Image</a>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <a href="/" class="btn btn-secondary">Transform Another</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="comic-box" style="text-align: center; padding: 60px 20px; margin-top: 20px; position: relative;">
+    <div style="background: var(--black); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 30px; border: 4px solid var(--black); letter-spacing: 2px;">
+        MAIN TERMINAL
+    </div>
+
+    <h1 style="margin-bottom: 20px; margin-top: 10px;">Turn Reality Into <br><span>Anime Art</span></h1>
+    
+    <p style="font-size: 1.3em; max-width: 700px; margin: 0 auto 40px; font-weight: 700; color: #444; line-height: 1.5;">
+        Upload your images and process them through advanced computer vision models to generate high-contrast, 2D-styled aesthetic art.
+    </p>
+
+    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; margin-top: 20px;">
+        
+        <div style="position: relative; width: 100%; max-width: 350px;">
+            <div style="background: var(--black); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: -10px; padding: 5px 15px; border: 4px solid var(--black); z-index: 2;">
+                REALITY .JPG
+            </div>
+            <img id="reality-img" src="{{ url_for('static', filename='org1.jpg') }}" alt="Reality Sample" style="width: 100%; height: 250px; border: 4px solid var(--black); box-shadow: 10px 10px 0px var(--light-gray); display: block; background: #eee; object-fit: cover; transition: opacity 0.3s ease-in-out;">
+        </div>
+
+        <div style="font-size: 3em; font-weight: 900; color: var(--primary-red); margin-top: -20px;">
+            →
+        </div>
+
+        <div style="position: relative; width: 100%; max-width: 350px;">
+            <div style="background: var(--primary-red); color: var(--white); font-weight: 900; position: absolute; top: -15px; right: -10px; padding: 5px 15px; border: 4px solid var(--black); z-index: 2;">
+                ANIME .2D
+            </div>
+            <img id="anime-img" src="{{ url_for('static', filename='1.jpg') }}" alt="Anime Sample" style="width: 100%; height: 250px; border: 4px solid var(--black); box-shadow: 10px 10px 0px var(--primary-red); display: block; background: #eee; object-fit: cover; transition: opacity 0.3s ease-in-out;">
+        </div>
+
+    </div>
+    
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="/models" class="btn" style="font-size: 1.2em; padding: 18px 40px;">Explore Models</a>
+        <a href="/about" class="btn btn-secondary" style="font-size: 1.2em; padding: 18px 40px;">Read Architecture</a>
+    </div>
+</div>
+
+<script>
+    // Set how many image pairs you have in your static folder!
+    const totalSamples = 9; 
+    let currentIndex = 1;
+    
+    // Grab the image elements
+    const realityImg = document.getElementById('reality-img');
+    const animeImg = document.getElementById('anime-img');
+    
+    // Get the base path from Flask so it works securely
+    const staticBaseUrl = "{{ url_for('static', filename='') }}";
+
+    // Run this loop every 1.5 seconds (1500 milliseconds)
+    setInterval(() => {
+        // Step 1: Fade out
+        realityImg.style.opacity = 0.1;
+        animeImg.style.opacity = 0.1;
+
+        // Step 2: Wait for fade out, then swap images and fade back in
+        setTimeout(() => {
+            // Increment the counter, loop back to 1 if we exceed the total
+            currentIndex++;
+            if(currentIndex > totalSamples) {
+                currentIndex = 1;
+            }
+
+            // Swap the image sources
+            realityImg.src = staticBaseUrl + `org${currentIndex}.jpg`;
+            animeImg.src = staticBaseUrl + `${currentIndex}.jpg`;
+
+            // Fade back in
+            realityImg.style.opacity = 1;
+            animeImg.style.opacity = 1;
+        }, 200); // Wait 300ms for the CSS opacity transition to finish
+
+    }, 3000);
+</script>
+
+{% endblock %}

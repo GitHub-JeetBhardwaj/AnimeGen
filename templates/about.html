@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="comic-box" style="margin-top: 20px;">
+    <h2 style="color: var(--primary-red); border-bottom: 5px solid var(--black); padding-bottom: 15px; font-size: 2.5em;">About The Architecture</h2>
+    
+    <p style="font-size: 1.2em; font-weight: 700; color: #444; margin-bottom: 30px; line-height: 1.5;">
+        This application utilizes custom AI models specifically developed for processing digital images into hand-drawn style anime outputs.
+    </p>
+    
+    <div style="border: 4px solid var(--black); padding: 25px; margin-bottom: 25px; position: relative;">
+        <div style="background: var(--black); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: -4px; padding: 5px 15px; border: 4px solid var(--black);">
+            SYSTEM .01
+        </div>
+        
+        <h3 style="font-size: 1.8em; margin-top: 10px; margin-bottom: 15px;">Generative GAN + Upscaling</h3>
+        <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 0;">
+            Utilizes a Text-Guided Generator matching CLIP text embeddings with cross-attention layers. Features Inverted Residual Blocks and upscaling.
+        </p>
+    </div>
+
+    <div style="border: 4px solid var(--black); padding: 25px; position: relative;">
+        <div style="background: var(--primary-red); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: -4px; padding: 5px 15px; border: 4px solid var(--black);">
+            SYSTEM .02
+        </div>
+        
+        <h3 style="font-size: 1.8em; margin-top: 10px; margin-bottom: 15px;">OpenCV Posterization</h3>
+        <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 0;">
+            A deterministic computer vision approach. Applies bilateral filtering, color saturation boosting, mathematical color banding (posterization), and adaptive thresholding to create distinct flat shading layers resembling 2D cel-shaded artwork.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

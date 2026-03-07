@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Gen | Jeet Bhardwaj</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+
+        :root {
+            --primary-red: #ff2a2a; /* Sharp manga red */
+            --dark-red: #cc0000;
+            --black: #111111;       /* Ink black */
+            --white: #ffffff;
+            --light-gray: #f0f0f0;
+            --mid-gray: #cccccc;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Manga Screentone Effect (Gray dots on white) */
+            background-image: radial-gradient(var(--mid-gray) 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+
+        /* Nav Bar - 2D Styled */
+        nav {
+            background: var(--white);
+            border-bottom: 5px solid var(--black);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 6px 0px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Red Stripe at the very top of the page */
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: var(--primary-red);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            /* Thick manga title text outline */
+            text-shadow:
+                -2px -2px 0 var(--black),
+                 2px -2px 0 var(--black),
+                -2px  2px 0 var(--black),
+                 2px  2px 0 var(--black),
+                 5px  5px 0 var(--primary-red);
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 900;
+            text-transform: uppercase;
+            border: 3px solid transparent;
+            padding: 6px 14px;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+
+        .nav-links a:hover {
+            border: 3px solid var(--black);
+            background: var(--light-gray);
+            /* Offset pop shadow on hover */
+            box-shadow: 4px 4px 0px var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            flex: 1;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Manga Panel UI Box */
+        .comic-box {
+            background: var(--white);
+            border: 4px solid var(--black);
+            /* Double layered shadow for a stacked paper look */
+            box-shadow: 12px 12px 0px var(--light-gray), 12px 12px 0px 4px var(--black); 
+            padding: 35px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .comic-box-enhanced{
+            background: var(--white);
+            border: 4px solid var(--black);
+            /* Double layered shadow for a stacked paper look */
+            box-shadow: 12px 12px 0px var(--primary-red), 12px 12px 0px 4px var(--black); 
+            padding: 35px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        /* Inner manga panel border */
+        .comic-box::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 2px solid var(--black);
+            pointer-events: none;
+        }
+        .comic-box-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 2px solid var(--black);
+            pointer-events: none;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary-red);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 4px solid var(--black);
+            padding: 14px 28px;
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px var(--black);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--black);
+            background: var(--dark-red);
+        }
+
+        .btn:active {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0px var(--black);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-gray);
+        }
+
+        .btn-disabled {
+            background: var(--mid-gray);
+            color: var(--white);
+            border-color: var(--black);
+            box-shadow: 6px 6px 0px var(--black);
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--white);
+            color: var(--black);
+            padding: 40px 40px;
+            text-align: center;
+            border-top: 5px solid var(--black);
+            margin-top: auto;
+            position: relative;
+        }
+
+        /* Red/White hazard stripes above footer */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--primary-red),
+                var(--primary-red) 10px,
+                var(--white) 10px,
+                var(--white) 20px
+            );
+            border-top: 4px solid var(--black);
+            border-bottom: 4px solid var(--black);
+        }
+
+        footer a {
+            color: var(--primary-red);
+            font-weight: 900;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: border-bottom 0.2s;
+        }
+        footer a:hover {
+            border-bottom: 3px solid var(--black);
+            color: var(--black);
+        }
+
+        h1, h2, h3 {
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        /* Stylized red text spans in headers */
+        h1 span {
+            color: var(--primary-red);
+            text-shadow:
+                -2px -2px 0 var(--black),
+                 2px -2px 0 var(--black),
+                -2px  2px 0 var(--black),
+                 2px  2px 0 var(--black),
+                 5px  5px 0 var(--mid-gray);
+        }
+
+        /* Flash Error/Success Messages */
+        .alert {
+            background: var(--white);
+            border: 4px solid var(--primary-red);
+            border-left: 12px solid var(--primary-red);
+            padding: 15px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            box-shadow: 6px 6px 0px var(--black);
+            text-transform: uppercase;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; align-items: center; text-align: center; padding: 15px 20px; }
+            .nav-links { justify-content: center; margin-top: 15px; }
+            h1 { font-size: 2.5em !important; }
+            .comic-box { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AnimeGen By Jeet</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/models">Models</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer id="contact">
+        <h2>Contact Details</h2>
+        <p><strong>Name:</strong>Jeet Bhardwaj</p>
+        <p><strong>Email:</strong> <a href="mailto:thejeetbhardwaj@gmail.com">thejeetbhardwaj@gmail.com</a></p>
+        <p>
+            <a href="https://www.linkedin.com/in/thejeetbhardwaj/">LinkedIn</a> | 
+            <a href="https://github.com/GitHub-JeetBhardwaj">GitHub</a>
+        </p>
+        <p style="font-size: 12px; margin-top: 20px; color: var(--mid-gray);">©2026</p>
+    </footer>
+
+</body>
+</html>

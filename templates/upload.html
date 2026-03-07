@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="comic-box" style="max-width: 650px; margin: 40px auto; text-align: center; position: relative;">
+    <div style="background: var(--black); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 30px; border: 4px solid var(--black); letter-spacing: 2px;">
+        INPUT TERMINAL
+    </div>
+
+    <h2 style="font-size: 2.2em; margin-top: 30px;">Initialize <span style="color: var(--primary-red);">Mode {{ mode }}</span></h2>
+    <p style="font-size: 1.2em; font-weight: 700; color: #555;">Select an image file to process through the transformation matrix.</p>
+    
+    <form action="{{ url_for('upload', mode=mode) }}" method="post" enctype="multipart/form-data" style="margin-top: 40px;" onsubmit="document.getElementById('submitBtn').innerText = 'PROCESSING... PLEASE WAIT'; document.getElementById('submitBtn').style.pointerEvents = 'none';">
+        
+        <div style="border: 4px dashed var(--black); padding: 50px 20px; margin-bottom: 30px; background: var(--light-gray); cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--light-gray)'">
+            <h3 style="margin-top: 0; color: var(--primary-red);">SELECT TARGET FILE</h3>
+            <input type="file" name="file" accept=".jpg, .jpeg, .png" required style="font-family: inherit; font-size: 1.1em; font-weight: 700; max-width: 100%; cursor: pointer;">
+        </div>
+        
+        <button type="submit" id="submitBtn" class="btn" style="width: 100%; font-size: 1.5em; padding: 20px;">Execute Transformation</button>
+    </form>
+    
+    <div style="margin-top: 30px;">
+        <a href="/models" style="color: var(--black); font-weight: 900; text-decoration: underline; text-decoration-thickness: 3px; font-size: 1.2em;">← ABORT & RETURN</a>
+    </div>
+</div>
+
+{% endblock %}

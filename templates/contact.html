@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="comic-box" style="max-width: 650px; margin: 40px auto; text-align: center; position: relative;">
+    <div style="background: var(--black); height: 15px; width: 150px; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);"></div>
+
+    <h1 style="font-size: 3em; margin-bottom: 10px; margin-top: 20px;">Let's <span>Connect</span></h1>
+    <p style="color: #555; font-size: 1.2em; font-weight: 700; margin-bottom: 40px;">Have questions about the architecture or want to collaborate?</p>
+    
+    <div style="text-align: left; background: var(--light-gray); padding: 30px; border: 4px solid var(--black); position: relative;">
+        <div style="background: var(--primary-red); color: var(--white); font-weight: 900; position: absolute; top: -15px; left: -4px; padding: 5px 20px; border: 4px solid var(--black);">
+            AUTHOR ID
+        </div>
+
+        <h2 style="font-size: 2.2em; margin-top: 15px; margin-bottom: 5px; color: var(--black);">Jeet Bhardwaj</h2>
+        <p style="font-size: 1.1em; font-weight: 900; color: #666; margin-top: 0; border-bottom: 2px dashed #999; padding-bottom: 15px;">Progress not perfection</p>
+        
+        <p style="font-size: 1.3em; font-weight: 900; margin-top: 20px;">
+            <span style="display: inline-block; width: 100px; color: var(--primary-red);">EMAIL:</span> <br>
+            <a href="mailto:thejeetbhardwaj@gmail.com" style="color: var(--black); text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--primary-red);">thejeetbhardwaaj@gmail.com</a>
+        </p>
+        
+        <div style="margin-top: 40px; display: flex; gap: 20px;">
+            <a href="https://www.linkedin.com/in/thejeetbhardwaj/" class="btn" style="flex: 1; text-align: center;">LinkedIn</a>
+            <a href="https://github.com/GitHub-JeetBhardwaj" class="btn btn-secondary" style="flex: 1; text-align: center;">GitHub</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

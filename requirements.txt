@@ -1,0 +1,11 @@
+flask
+werkzeug
+torch
+torchvision
+transformers
+pillow
+numpy
+scikit-image
+opencv-python-headless
+basicsr
+realesrgan
