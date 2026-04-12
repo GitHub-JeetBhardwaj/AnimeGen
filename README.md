@@ -7,7 +7,7 @@
 
 **AnimeGen** is a full-stack generative AI and computer vision framework designed to transform real-world photographs into high-contrast, 2D cel-shaded anime art. 
 
-This repository contains both the **Flask-based web application** (featuring a custom Neo-Manga UI) and the **PyTorch training pipeline** used to develop the State-of-the-Art (SOTA) generative models.
+This repository contains both the **Flask-based web application** (featuring a custom Neo-Manga UI) and the **PyTorch training pipeline** used to develop the generative models.
 
 🌍 **Live Demo:** [thejeetbhardwaj-animegen.hf.space](https://thejeetbhardwaj-animegen.hf.space/)
 
@@ -28,9 +28,8 @@ The application features three distinct processing modes, allowing users to choo
 * **Output:** Distinct, flat shading layers resembling classic 2D cel-shaded artwork without AI hallucination.
 
 ### 🔥 SYSTEM .03: Dynamic U-Net (SOTA)
-* **Architecture:** Advanced U-Net with custom layer-1 skip connections.
-* **Process:** Calculates a dynamic scaling ratio based on a **512px baseline**, snapping to multiples of 8 to ensure perfect downsampling/upsampling alignment in the latent space.
-* **Output:** Highly detailed, structurally accurate outputs guided toward *Makoto Shinkai* and *Studio Ghibli* cinematic aesthetics.
+* **Upcoming Architecture:** Advanced U-Net with custom layer-1 skip connections.
+
 
 ---
 
@@ -46,7 +45,7 @@ To ensure the models learned from the absolute best visual data, I built a custo
 
 ## 🧠 Model Training & Technical Highlights
 
-The custom SOTA model (`System .03`) was trained from scratch using a highly specialized PyTorch pipeline.
+The custom model was trained from scratch.
 
 ### 1. Hybrid 4-Channel Input
 The generator does not just take RGB images. It takes a **4-channel tensor** consisting of:
@@ -83,38 +82,14 @@ pip install -r requirements.txt
 
 ### 3. Model Weights
 Place your trained PyTorch `.pth` files in the root directory:
-* `latest_G_stensilupdated15epoch.pth` (For Mode 1)
-* `latest_checkpoint.pth` (For Mode 3 SOTA)
+* `perfect.pth`
+
 
 ### 4. Run the Application
 ```bash
 python app.py
 ```
 The web app will launch at `http://127.0.0.1:5000`
-
----
-
-## 📂 Directory Structure
-```text
-AnimeGen/
-├── app.py                  # Main Flask application & inference routing
-├── train_sota.py           # PyTorch training script and loss functions
-├── dataset_extractor.py    # OpenCV video-to-frame dataset curation script
-├── requirements.txt        # Python dependencies
-├── latest_checkpoint.pth   # [Add your weights here]
-├── static/
-│   ├── sample1.jpg         # Demo reality image
-│   ├── sample1_after.jpg   # Demo anime image
-│   ├── uploads/            # Temporarily stores user inputs
-│   └── outputs/            # Stores generated results
-└── templates/
-    ├── base.html           # Manga-styled master CSS and layout
-    ├── index.html          # Hero section with sliding image showcase
-    ├── about.html          # Technical architecture documentation
-    ├── models.html         # Mode initialization selection
-    ├── upload.html         # Dropzone interface
-    └── result.html         # Output viewer with mission stat timer
-```
 
 ---
 
